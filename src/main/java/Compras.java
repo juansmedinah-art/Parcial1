@@ -1,34 +1,39 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Compras {
-    private int codigoCompras;
+    private int codigoCompra;
     private LocalDate fechaDeRealizacion;
-    private double valorTtotal;
+    private double valorTotal;
     private MetodoPago metodoPago;
+    private List<Productos> listaProductos;
 
     public Compras(int codigoCompras, LocalDate fechaDeRealizacion, double valorTtotal, MetodoPago metodoPago) {
-        this.codigoCompras = codigoCompras;
+        this.codigoCompra = codigoCompras;
         this.fechaDeRealizacion = fechaDeRealizacion;
-        this.valorTtotal = valorTtotal;
+        this.valorTotal = valorTtotal;
         this.metodoPago = metodoPago;
+
+        this.listaProductos = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         return "Compras{" +
-                "codigoCompras=" + codigoCompras +
+                "codigoCompra=" + codigoCompra +
                 ", fechaDeRealizacion=" + fechaDeRealizacion +
-                ", valorTtotal=" + valorTtotal +
+                ", valorTtotal=" + valorTotal +
                 ", metodoPago=" + metodoPago +
                 '}';
     }
 
     public int getCodigoCompras() {
-        return codigoCompras;
+        return codigoCompra;
     }
 
     public void setCodigoCompras(int codigoCompras) {
-        this.codigoCompras = codigoCompras;
+        this.codigoCompra = codigoCompras;
     }
 
     public LocalDate getFechaDeRealizacion() {
@@ -40,11 +45,11 @@ public class Compras {
     }
 
     public double getValorTtotal() {
-        return valorTtotal;
+        return valorTotal;
     }
 
     public void setValorTtotal(double valorTtotal) {
-        this.valorTtotal = valorTtotal;
+        this.valorTotal = valorTtotal;
     }
 
     public MetodoPago getMetodoPago() {
@@ -54,4 +59,10 @@ public class Compras {
     public void setMetodoPago(MetodoPago metodoPago) {
         this.metodoPago = metodoPago;
     }
+
+    public List<Productos> getListaProductos() {
+        return listaProductos;
+    }
+
+    //Metodo para agregar un porducto a la compar
 }
