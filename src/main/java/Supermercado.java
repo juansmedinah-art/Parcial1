@@ -81,6 +81,8 @@ public class Supermercado {
                 '}';
     }
 
+    //metodos de estudiante
+    //Buscar cliente y comprobar
     public Clientes buscarCliente(int documento){
         for(Clientes cliente: listaClientes){
             if(documento == cliente.getDocumento()){
@@ -89,6 +91,7 @@ public class Supermercado {
         }
         return null;
     }
+    //metodo registrar cliente
     public boolean registrarCliente(Clientes cliente){
         boolean clienteRegistrado = false;
         Clientes clienteExistente = buscarCliente(cliente.getDocumento());
@@ -98,6 +101,37 @@ public class Supermercado {
         }
         return clienteRegistrado;
     }
+    //metodo actualizar cliente
+    public boolean actualizarCliente(int documento, Clientes clienteActualizado){
+        boolean estaActualizado=false;
+        for(Clientes cliente: listaClientes){
+            if (cliente.getDocumento()== documento){
+
+                cliente.setNombre(clienteActualizado.getNombre());
+                cliente.setCorreo(clienteActualizado.getCorreo());
+                cliente.setTelefono(clienteActualizado.getTelefono());
+                estaActualizado=true;
+                break;
+            }
+
+        }
+        return estaActualizado;
+    }
+    //eliminar cliente
+    public boolean eliminarCliente(int documento){
+        boolean esEliminado=false;
+        for(Clientes cliente: listaClientes){
+            if(cliente.getDocumento()==documento){
+                listaClientes.remove(cliente);
+                esEliminado=true;
+                break;
+            }
+
+        }
+        return esEliminado;
+    }
+
+
     public Productos buscarProducto(int codigo){
 
         for(Productos producto: listaProductos){
@@ -115,7 +149,40 @@ public class Supermercado {
             productoRegistrado=true;
         }
         return productoRegistrado;
+
+
     }
+
+    public boolean actualizarPorducto(int codigo, Productos productoActualizado){
+        boolean estaActualizado=false;
+        for(Productos producto: listaProductos){
+            if (producto.getCodigoProducto()==codigo ){
+
+                producto.setNombre(productoActualizado.getNombre());
+                producto.setCategoria(productoActualizado.getCategoria());
+                producto.setPrecioUnitario(productoActualizado.getPrecioUnitario());
+                producto.setStock(productoActualizado.getStock());
+                estaActualizado=true;
+                break;
+            }
+
+        }
+        return estaActualizado;
+    }
+
+    public boolean eliminarProducto(int codigo){
+        boolean esEliminado=false;
+        for(Productos producto: listaProductos){
+            if(producto.getCodigoProducto()==codigo){
+                listaProductos.remove(producto);
+                esEliminado=true;
+                break;
+            }
+
+        }
+        return esEliminado;
+    }
+
     public Compras buscarCompra(int codigoCompra){
         for(Compras compra: listaCompras){
             if(codigoCompra ==compra.getCodigoCompra()){
