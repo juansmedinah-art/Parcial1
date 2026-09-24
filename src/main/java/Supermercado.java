@@ -153,7 +153,7 @@ public class Supermercado {
 
     }
 
-    public boolean actualizarPorducto(int codigo, Productos productoActualizado){
+    public boolean actualizarProducto(int codigo, Productos productoActualizado){
         boolean estaActualizado=false;
         for(Productos producto: listaProductos){
             if (producto.getCodigoProducto()==codigo ){

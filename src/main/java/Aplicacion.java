@@ -79,24 +79,40 @@ public class Aplicacion {
                     Clientes clienteActualizado=new Clientes(nuevoNombre, documentoActualizar, nuevoTelefono, nuevoCorreo);
 
                     if(supermercado.actualizarCliente(documentoActualizar, clienteActualizado)){
-                        System.out.println("Profesor actualizado correctamente.");
+                        System.out.println("cliente actualizado correctamente.");
 
                     }else {
-                        System.out.println("El profesor no existe");
+                        System.out.println("El cliente no existe");
                     }
                     break;
 
                 case 3:
                     System.out.println("----Buscar cliente----");
+                    System.out.println("digite el documento del cliente");
+                    int documento1 = sc.nextInt();
+                    sc.nextLine();
 
+                    boolean encontrado = false;
+                    for (Clientes cliente1 : supermercado.getListaClientes()) {
+                        if (cliente1.getDocumento() == documento1) {
+                            System.out.println("El cliente se encuentra registrado: ");
+                            System.out.println(cliente1);
+                            encontrado = true;
+                            break;
+                        }
+                    }
 
-
+                    if (!encontrado) {
+                        System.out.println("El cliente no se encuentra registrado");
+                    }
+                break;
 
                 case 4:
                     System.out.println("----Mostrar clientes----");
                     for(Clientes clientesLista: supermercado.getListaClientes()){
                         System.out.println(clientesLista);
                     }
+                    break;
 
                 case 5:
                     System.out.println("----Eliminar cliente----");
@@ -110,12 +126,14 @@ public class Aplicacion {
                     }else{
                         System.out.println("cliente no encontrado");
                     }
+                    break;
 
                 case  6:
                     System.out.println("----Mostrar productos----");
                     for(Productos productosLista: supermercado.getListaProductos()){
                         System.out.println(productosLista);
                     }
+                    break;
 
                 case 7:
                     System.out.println("----Registrar producto----");
@@ -190,16 +208,16 @@ public class Aplicacion {
                     Categoria categoriaActualizada=null;
                     switch (opcionCategoriaActualizada){
                         case 1:
-                            categoria=Categoria.ALIMENTOS;
+                            categoriaActualizada=Categoria.ALIMENTOS;
                             break;
                         case 2:
-                            categoria=Categoria.BEBIDAS;
+                            categoriaActualizada=Categoria.BEBIDAS;
                             break;
                         case 3:
-                            categoria=Categoria.ASEO;
+                            categoriaActualizada=Categoria.ASEO;
                             break;
                         case 4:
-                            categoria=Categoria.CUIDADO_PERSONAL;
+                            categoriaActualizada=Categoria.CUIDADO_PERSONAL;
                             break;
                         default:
                             System.out.println("opcion no valida");
@@ -207,7 +225,8 @@ public class Aplicacion {
                     }
 
                     System.out.println("Nuevo precio unitario: ");
-                    int nuevoPrecioUnitario=sc.nextInt();
+                    double nuevoPrecioUnitario=sc.nextDouble();
+                    sc.nextLine();
 
 
                     System.out.println("Nuevo stock: ");
@@ -215,11 +234,11 @@ public class Aplicacion {
 
                     Productos productoActualizado=new Productos(codigoPActualizar, nuevoNombreP,  categoriaActualizada, nuevoPrecioUnitario, nuevoStock);
 
-                    if(supermercado.actualizarPorducto(codigoPActualizar, productoActualizado)){
+                    if(supermercado.actualizarProducto(codigoPActualizar, productoActualizado)){
                         System.out.println("producto actualizado correctamente.");
 
                     }else {
-                        System.out.println("El peoducto no existe");
+                        System.out.println("El producto no existe");
                     }
                     break;
 
@@ -236,15 +255,114 @@ public class Aplicacion {
                     }else{
                         System.out.println("Producto no encontrado");
                     }
+                    break;
 
                 case 10:
                     System.out.println("----Realizar compra----");
+                    System.out.println("Digite el documento del cliente: ");
+                    int documentoCompra = sc.nextInt();
+                    sc.nextLine();
 
+                    Clientes clienteCompra = null;
+                    for (Clientes clienteActual : supermercado.getListaClientes()) {
+                        if (clienteActual.getDocumento() == documentoCompra) {
+                            clienteCompra = clienteActual;
+                            break;
+                        }
+                    }
+
+                    if (clienteCompra == null) {
+                        System.out.println("Cliente no encontrado");
+                        break;
+                    }
+
+                    System.out.println("Seleccione el metodo de pago: ");
+                    int numeroOpcionPago = 1;
+                    for (MetodoPago metodoPagoDisponible : MetodoPago.values()) {
+                        System.out.println(numeroOpcionPago + ". " + metodoPagoDisponible);
+                        numeroOpcionPago++;
+                    }
+
+                    int opcionPago = sc.nextInt();
+                    sc.nextLine();
+
+                    MetodoPago metodoPagoSeleccionado = null;
+                    switch (opcionPago) {
+                        case 1:
+                            metodoPagoSeleccionado = MetodoPago.EFECTIVO;
+                            break;
+                        case 2:
+                            metodoPagoSeleccionado = MetodoPago.TARJETA;
+                            break;
+                        case 3:
+                            metodoPagoSeleccionado = MetodoPago.TRANSFERENCIA_BANCARIA;
+                            break;
+                        default:
+                            System.out.println("Opcion no valida");
+                            break;
+                    }
+
+                    int codigoCompra = supermercado.getListaCompras().size() + 1;
+                    Compras compraActual = new Compras(codigoCompra, LocalDate.now(), 0, metodoPagoSeleccionado);
+
+                    String seguirAgregando = "s";
+                    while (seguirAgregando.equalsIgnoreCase("s")) {
+                        System.out.println("Digite el codigo del producto: ");
+                        int codigoProductoCompra = sc.nextInt();
+                        sc.nextLine();
+
+                        Productos productoEncontrado = null;
+                        for (Productos productoDigitado : supermercado.getListaProductos()) {
+                            if (productoDigitado.getCodigoProducto() == codigoProductoCompra) {
+                                productoEncontrado = productoDigitado;
+                                break;
+                            }
+                        }
+
+                        if (productoEncontrado == null) {
+                            System.out.println("Producto no encontrado");
+                        } else if (compraActual.agregarProducto(productoEncontrado)) {
+                            System.out.println("Producto agregado a la compra");
+                        } else {
+                            System.out.println("No hay stock disponible");
+                        }
+
+                        System.out.println("Desea agregar otro producto? (s/n)");
+                        seguirAgregando = sc.nextLine();
+                    }
+
+                    if (supermercado.registrarCompra(documentoCompra, compraActual)) {
+                        System.out.println("Compra realizada con exito. Total: " + compraActual.getValorTotal());
+                    } else {
+                        System.out.println("No hay ningun producto digitado, la compra sera cancelada");
+                    }
+                    break;
 
                 case 11:
-                    System.out.println("----Consultar fechas----");
-                    LocalDate fecha= sc.nextLine().
+                    System.out.println("----Consultar compras de un cliente----");
+                    System.out.println("Digite el documento del cliente: ");
+                    int documentoConsulta = sc.nextInt();
+                    sc.nextLine();
 
+                    if (supermercado.consultarCompras(documentoConsulta) != null && !supermercado.consultarCompras(documentoConsulta).isEmpty()) {
+                        System.out.println("Compras del cliente: ");
+                        for (Compras compraDigitada : supermercado.consultarCompras(documentoConsulta)) {
+                            System.out.println(compraDigitada);
+                        }
+                    } else {
+                        System.out.println("El cliente no se encuentra registrado o no tiene compras");
+                    }
+                    break;
+
+                case 12:
+                    System.out.println("===Total vendido pro una fecha===");
+                    System.out.println("Digite la fecha en formato año-mes-dia");
+                    LocalDate reporteFecha=LocalDate.parse(sc.nextLine());
+
+                    double totalVendido= supermercado.calcularVentasPorFecha(reporteFecha);
+
+                    System.out.println("El total vendido por la fecha "+reporteFecha+" es: "+totalVendido);
+                    break;
 
                 case 0:
                     System.out.println("programa actualizado");
@@ -254,7 +372,7 @@ public class Aplicacion {
                     System.out.println("Opcion no valida");
             }
 
-        }
+        }while(opcion !=0);
 
     }
 }
