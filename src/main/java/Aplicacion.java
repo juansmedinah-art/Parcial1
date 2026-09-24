@@ -37,6 +37,7 @@ public class Aplicacion {
 
                     System.out.println("Digite el nombre del cliente: ");
                     String nombre=sc.nextLine();
+
                     System.out.println("Digite el documento del cliente: ");
                     int documento=sc.nextInt();
                     sc.nextLine();
@@ -64,13 +65,14 @@ public class Aplicacion {
 
                     System.out.println("Documento cliente: ");
                     int documentoActualizar=sc.nextInt();
+                    sc.nextLine();
 
                     System.out.println("Nuevo nombre del cliente: ");
                     String nuevoNombre= sc.nextLine();
 
                     System.out.println("Nuevo telefono: ");
                     int nuevoTelefono=sc.nextInt();
-
+                    sc.nextLine();
 
                     System.out.println("Nuevo correo: ");
                     String nuevoCorreo=sc.nextLine();
@@ -172,6 +174,8 @@ public class Aplicacion {
                     sc.nextLine();
                     System.out.println("Digite el precio unitario del producto: ");
                     double preciounitario=sc.nextDouble();
+                    sc.nextLine();
+
                     System.out.println("Digite la cantidad de producto que hay(stock)");
                     int stock= sc.nextInt();
 
@@ -192,6 +196,7 @@ public class Aplicacion {
 
                     System.out.println("Codigo producto: ");
                     int codigoPActualizar=sc.nextInt();
+                    sc.nextLine();
 
                     System.out.println("Nuevo nombre del producto");
                     String nuevoNombreP=sc.nextLine();
@@ -288,13 +293,13 @@ public class Aplicacion {
                     MetodoPago metodoPagoSeleccionado = null;
                     switch (opcionPago) {
                         case 1:
-                            metodoPagoSeleccionado = MetodoPago.EFECTIVO;
-                            break;
-                        case 2:
                             metodoPagoSeleccionado = MetodoPago.TARJETA;
                             break;
-                        case 3:
+                        case 2:
                             metodoPagoSeleccionado = MetodoPago.TRANSFERENCIA_BANCARIA;
+                            break;
+                        case 3:
+                            metodoPagoSeleccionado = MetodoPago.EFECTIVO;
                             break;
                         default:
                             System.out.println("Opcion no valida");
