@@ -7,7 +7,7 @@ import java.util.List;
         private int telefono;
         private String correo;
 
-        private List<Compras> ListaCompras;
+        private List<Compras> listaCompras;
 
         public Clientes(String nombre, int documento, int telefono, String correo) {
             this.nombre = nombre;
@@ -15,21 +15,9 @@ import java.util.List;
             this.telefono = telefono;
             this.correo = correo;
 
-            this.ListaCompras=new ArrayList<>();
+            this.listaCompras=new ArrayList<>();
 
         }
-
-        @Override
-        public String toString() {
-            return "Clientes{" +
-                    "nombre='" + nombre + '\'' +
-                    ", documento=" + documento +
-                    ", telefono=" + telefono +
-                    ", correo='" + correo + '\'' +
-                    ", Lista de compras"+ListaCompras+'\''+
-                    '}';
-        }
-
 
         public String getNombre() {
             return nombre;
@@ -64,10 +52,25 @@ import java.util.List;
         }
 
         public List<Compras> getListaCompras() {
-            return ListaCompras;
+            return listaCompras;
         }
 
         public void setListaCompras(List<Compras> listaCompras) {
-            ListaCompras = listaCompras;
+            this.listaCompras = listaCompras;
+        }
+
+        public void agregarCompra(Compras compra) {
+            listaCompras.add(compra);
+        }
+
+        @Override
+        public String toString() {
+            return "Clientes{" +
+                    "nombre='" + nombre + '\'' +
+                    ", documento=" + documento +
+                    ", telefono=" + telefono +
+                    ", correo='" + correo + '\'' +
+                    ", listaCompras=" + listaCompras +
+                    '}';
         }
     }

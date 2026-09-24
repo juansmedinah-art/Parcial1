@@ -9,10 +9,10 @@ public class Compras {
     private MetodoPago metodoPago;
     private List<Productos> listaProductos;
 
-    public Compras(int codigoCompras, LocalDate fechaDeRealizacion, double valorTtotal, MetodoPago metodoPago) {
+    public Compras(int codigoCompras, LocalDate fechaDeRealizacion, double valorTotal, MetodoPago metodoPago) {
         this.codigoCompra = codigoCompras;
         this.fechaDeRealizacion = fechaDeRealizacion;
-        this.valorTotal = valorTtotal;
+        this.valorTotal = valorTotal;
         this.metodoPago = metodoPago;
 
         this.listaProductos = new ArrayList<>();
@@ -23,17 +23,17 @@ public class Compras {
         return "Compras{" +
                 "codigoCompra=" + codigoCompra +
                 ", fechaDeRealizacion=" + fechaDeRealizacion +
-                ", valorTtotal=" + valorTotal +
+                ", valorTotal=" + valorTotal +
                 ", metodoPago=" + metodoPago +
                 '}';
     }
 
-    public int getCodigoCompras() {
+    public int getCodigoCompra() {
         return codigoCompra;
     }
 
-    public void setCodigoCompras(int codigoCompras) {
-        this.codigoCompra = codigoCompras;
+    public void setCodigoCompra(int codigoCompra) {
+        this.codigoCompra = codigoCompra;
     }
 
     public LocalDate getFechaDeRealizacion() {
@@ -44,12 +44,12 @@ public class Compras {
         this.fechaDeRealizacion = fechaDeRealizacion;
     }
 
-    public double getValorTtotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTtotal(double valorTtotal) {
-        this.valorTotal = valorTtotal;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public MetodoPago getMetodoPago() {
@@ -64,5 +64,47 @@ public class Compras {
         return listaProductos;
     }
 
-    //Metodo para agregar un porducto a la compar
+    //Metodo para agregar un producto a la compar
+    public boolean agregarProducto(Productos producto) {
+        boolean productoAgregado = false;
+        int contador = 0;
+
+        for (Productos productos : listaProductos) {
+            if (productos.getCodigoProducto() == producto.getCodigoProducto()) {
+                contador++;
+            }
+        }
+        if (contador < producto.getStock()) {
+            listaProductos.add(producto);
+            productoAgregado = true;
+        }
+
+        return productoAgregado;
+    }
+    public double calcularTotal (){
+        double total= 0;
+
+        for(Productos item : listaProductos){
+            total +=item.getPrecioUnitario();
+        }
+        valorTotal=total;
+        return total;
+    }
+    public boolean confirmarCompra(){
+        boolean factura=false;
+        int cantidad=0;
+
+        for(Productos item: listaProductos){
+            cantidad= cantidad+1;
+            item.setStock(item.getStock()-1);
+        }
+        calcularTotal();
+        if(cantidad>0){
+            factura=true;
+        }else{
+            factura=false;
+        }
+        return factura;
+    }
+
 }

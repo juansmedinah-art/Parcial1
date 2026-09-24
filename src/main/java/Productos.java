@@ -1,25 +1,16 @@
 public class Productos {
     private int codigoProducto;
     private String nombre;
-    private double precioUnitario;
     private Categoria categoria;
+    private double precioUnitario;
+    private int stock;
 
-
-    public Productos(int codigoProducto, String nombre, double precioUnitario, Categoria categoria) {
+    public Productos(int codigoProducto, String nombre, Categoria categoria, double precioUnitario, int stock) {
         this.codigoProducto = codigoProducto;
         this.nombre = nombre;
-        this.precioUnitario = precioUnitario;
         this.categoria = categoria;
-    }
-
-    @Override
-    public String toString() {
-        return "Productos{" +
-                "codigoProducto=" + codigoProducto +
-                ", nombre='" + nombre + '\'' +
-                ", precioUnitario=" + precioUnitario +
-                ", categoria=" + categoria +
-                '}';
+        this.precioUnitario = precioUnitario;
+        this.stock = stock;
     }
 
     public int getCodigoProducto() {
@@ -52,5 +43,24 @@ public class Productos {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return "Productos{" +
+                "codigoProducto=" + codigoProducto +
+                ", stock=" + stock +
+                ", nombre='" + nombre + '\'' +
+                ", precioUnitario=" + precioUnitario +
+                ", categoria=" + categoria +
+                '}';
     }
 }
